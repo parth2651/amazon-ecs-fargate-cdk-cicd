@@ -99,7 +99,7 @@ export class EcsCdkStack extends cdk.Stack {
     const ecrRepo = new ecr.Repository(this, 'EcrRepo');
 
     const gitHubSource = codebuild.Source.gitHub({
-      owner: 'user-name',
+      owner: 'parth2651',
       repo: 'amazon-ecs-fargate-cdk-cicd',
       webhook: true, // optional, default: true if `webhookFilteres` were provided, false otherwise
       webhookFilters: [
