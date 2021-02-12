@@ -10,19 +10,7 @@ from application.forms import EnterDBInfo, RetrieveDBInfo
 
 app = flask.Flask(__name__)
 @app.route('/')
-def hello():
-    name = flask.request.args.get("name", "Flask-demo")
-    time = datetime.datetime.now()
-    python_version = platform.python_version()
-    aws_platform = os.environ.get('PLATFORM', 'Amazon Web Services')
-    return flask.render_template('hello.html',
-                                 platform=aws_platform,
-                                 flask_version=flask.__version__,
-                                 python_version=python_version,
-                                 flask_url='https://palletsprojects.com/p/flask/',
-                                 time=time,
-                                 name=name)
-
+@app.route('/index', methods=['GET', 'POST'])
 def index():
     form1 = EnterDBInfo(request.form) 
     form2 = RetrieveDBInfo(request.form) 
@@ -49,7 +37,18 @@ def index():
         return render_template('results.html', results=query_db, num_return=num_return)                
     
     return render_template('index.html', form1=form1, form2=form2)
-
+def hello():
+    name = flask.request.args.get("name", "Flask-demo")
+    time = datetime.datetime.now()
+    python_version = platform.python_version()
+    aws_platform = os.environ.get('PLATFORM', 'Amazon Web Services')
+    return flask.render_template('hello.html',
+                                 platform=aws_platform,
+                                 flask_version=flask.__version__,
+                                 python_version=python_version,
+                                 flask_url='https://palletsprojects.com/p/flask/',
+                                 time=time,
+                                 name=name)
 if __name__ == '__main__':
     app.run(
         debug=True,
